@@ -1,0 +1,9 @@
+# Config
+.env
+
+# Dependencies
+/node_modules
+
+# General
+.idea
+.DS_Store

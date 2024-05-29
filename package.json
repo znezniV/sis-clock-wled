@@ -1,0 +1,29 @@
+{
+  "name": "express-clock",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "concurrently -i -P \"nodemon ./bin/www\" \"vite\"",
+    "build": "vite build",
+    "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart"
+  },
+  "dependencies": {
+    "alpinejs": "^3.14.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-validator": "^7.1.0",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "twig": "~0.10.3",
+    "vite-express": "^0.16.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.2",
+    "vite": "^5.2.12"
+  }
+}

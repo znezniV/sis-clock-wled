@@ -1,0 +1,85 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+  <h1>{{title}}</h1>
+  <p>Once the clock is set, it will reset and start with the new settings.</p>
+  <p>When the clock reaches the end, it restarts in a loop with the previous settings.</p>
+  <table>
+    <tr>
+      <th>Duration</th>
+      <th>Start LED</th>
+      <th>Stop LED</th>
+      <th>End LED</th>
+    </tr>
+    <tr>
+      <td>{{ led_duration }}</td>
+      <td>{{ led_id_start }}</td>
+      <td>{{ led_id_stop }}</td>
+      <td>{{ led_id_end }}</td>
+    </tr>
+  </table>
+  <form action="/" method="post" class="form">
+    <fieldset class="form__inner">
+    <legend>Clock settings</legend>
+    <div class="form__group">
+      <label for="duration">Circle animation duration in minutes: </label>
+      <input
+        id="duration"
+        type="number"
+        name="duration_field"
+        value="{{ led_duration }}"
+        placeholder="minutes"
+        step="1"
+        min="5"
+        max="60"
+        required
+      />
+    </div>
+    <div class="form__group">
+      <label for="start">Circle start point: </label>
+      <input
+        id="start"
+        type="number"
+        name="start_field"
+        value="{{ led_id_start }}"
+        step="1"
+        min="1"
+        max="100"
+        placeholder="LED number"
+        required
+      />
+    </div>
+    <div class="form__group">
+      <label for="stop">Circle stop point (leave empty if not needed): </label>
+      <input
+        id="stop"
+        type="number"
+        name="stop_field"
+        value="{{ led_id_stop }}"
+        step="1"
+        min="3"
+        placeholder="LED number"
+        max="100"
+      />
+    </div>
+    <div class="form__group">
+      <label for="end">Circle end point (100 is the last one): </label>
+      <input
+        id="end"
+        type="number"
+        name="end_field"
+        value="{{ led_id_end }}"
+        placeholder="LED number"
+        step="1"
+        min="3"
+        max="100"
+        required
+      />
+    </div>
+    <div class="form__group">
+      <input type="submit" value="Set input and reset clock" />
+      <button disabled >Reset to default values</button>
+    </div>
+    </fieldset>
+</form>
+{% endblock %}
