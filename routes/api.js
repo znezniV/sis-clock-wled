@@ -1,9 +1,9 @@
 import express from 'express';
 const router = express.Router();
-let led_duration = 0
-let led_id_start = 0
-let led_id_stop = 0
-let led_id_end = 0
+let led_duration = 5
+let led_id_start = 1
+let led_id_stop = null
+let led_id_end = 100
 
 /* GET home page. */
 router.get('/api', function(req, res, next) {

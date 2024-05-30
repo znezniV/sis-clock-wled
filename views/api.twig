@@ -12,10 +12,10 @@
       <th>End LED</th>
     </tr>
     <tr>
-      <td>{{ led_duration }}</td>
-      <td>{{ led_id_start }}</td>
-      <td>{{ led_id_stop }}</td>
-      <td>{{ led_id_end }}</td>
+      <td>{{ led_duration|trim|length ? led_duration : 'none' }}</td>
+      <td>{{ led_id_start|trim|length ? led_id_start : 'none' }}</td>
+      <td>{{ led_id_stop|trim|length ? led_id_stop : 'none' }}</td>
+      <td>{{ led_id_end|trim|length ? led_id_end : 'none' }}</td>
     </tr>
   </table>
   <form action="/" method="post" class="form">
@@ -78,8 +78,7 @@
     </div>
     <div class="form__group">
       <input type="submit" value="Set input and reset clock" />
-      <button disabled >Reset to default values</button>
     </div>
-    </fieldset>
+  </fieldset>
 </form>
 {% endblock %}
