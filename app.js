@@ -1,5 +1,6 @@
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { EventEmitter } from 'events';
 
 // Convert the current module URL to a file path
 const __filename = fileURLToPath(import.meta.url);
@@ -17,7 +18,10 @@ import ViteExpress from "vite-express"
 import indexRouter from './routes/index.js';
 import apiRounter from './routes/api.js';
 
+import shared from './shared.js';
+
 const app = express();
+const eventEmitter = new EventEmitter();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +37,7 @@ app.use(express.static(path.join(__dirname, '/dist')));
 app.use(express.static(path.join(__dirname, '/dist/javascript')));
 app.use(express.static(path.join(__dirname, '/dist/javascript/main.js')));
 
-app.use('/', apiRounter);
+app.use('/', apiRounter(eventEmitter));
 // app.use('/api', apiRounter);
 
 // catch 404 and forward to error handler
@@ -52,6 +56,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-ViteExpress.listen(app, 3000, () => console.log("Server is listening..."));
+eventEmitter.on('event:clock_updated', handleClockUpdated);
 
-export default app;
+function handleClockUpdated() {
+  console.log(shared.led_duration)
+}
+
+export { app, eventEmitter };
