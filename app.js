@@ -1,23 +1,21 @@
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { EventEmitter } from 'events';
+import createError from 'http-errors';
+import express from 'express'
+import path from 'path'
+import cookieParser from 'cookie-parser'
+import logger from 'morgan'
 
+import apiRounter from './routes/api.js';
+import shared from './shared.js';
+
+const app = express();
+const eventEmitter = new EventEmitter();
 // Convert the current module URL to a file path
 const __filename = fileURLToPath(import.meta.url);
 // Derive the directory name from the file path
 const __dirname = dirname(__filename);
-
-import createError from 'http-errors';
-import express from 'express'
-
-import path from 'path'
-import cookieParser from 'cookie-parser'
-import logger from 'morgan'
-import ViteExpress from "vite-express"
-
-import indexRouter from './routes/index.js';
-import apiRounter from './routes/api.js';
-
-const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,14 +25,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'dist')));
-app.use(express.static(path.join(__dirname, '/dist')));
-app.use(express.static(path.join(__dirname, '/dist/javascript')));
-app.use(express.static(path.join(__dirname, '/dist/javascript/main.js')));
 
-app.use('/', apiRounter);
-// app.use('/api', apiRounter);
+app.use('/', apiRounter(eventEmitter));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,6 +45,10 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-ViteExpress.listen(app, 3000, () => console.log("Server is listening..."));
+eventEmitter.on('event:clock_updated', handleClockUpdated);
 
-export default app;
+function handleClockUpdated() {
+  console.log(shared.led_duration)
+}
+
+export { app, eventEmitter };
