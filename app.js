@@ -146,6 +146,32 @@ function publishValue() {
   })
 }
 
+// define solar fares publish
+function publishSolarFlares() {
+  const letter = Math.random() * 10
+  const float = Math.random() * 9 + 1
+
+  // get a letter with 70% likeliness for C, 20% for M, and 10% for X, combined with a random two digits float
+  const solarFlareMockup = `${
+    letter >= 9 ? 'X'
+    : letter >= 7 ? 'M'
+    : 'C'
+  }${float.toFixed(2)}`
+
+  const payload = {seg: [
+    {
+      n: `${solarFlareMockup}`
+    }
+  ]}
+
+  // mqtt publish payload to topic
+  client.publish(topicSolarFlares, JSON.stringify(payload), {qos: 1, retain: true}, (PacketCallback, err) => {
+    if(err) {
+        console.log(err, 'MQTT publish packet')
+    }
+  })
+}
+
 // define circle default positions (and colors)
 const circleCurrent = {
   color: '0000FF',
@@ -205,6 +231,7 @@ function publishCircle() {
 // start all the publish intervals
 let matrixInterval = setInterval(() => {publishCountdown(), publishValue()}, 1000)
 let circleInterval = setInterval(() => publishCircle(), circleSpeed)
+let solarFlareInterval = setInterval(() => publishSolarFlares(), 600000)
 
 eventEmitter.on('event:clock_updated', handleClockUpdated);
 
