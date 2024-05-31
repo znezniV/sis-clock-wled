@@ -1,4 +1,5 @@
 # How to use
+Excuse me for the spaghetti code. It had to be done, rather than beautiful.
 
 ## Deployment on Raspberry Pi (made with 3 B+)
 Note: incomplete
