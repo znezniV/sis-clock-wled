@@ -3,8 +3,9 @@ Description=SIS Clock Service
 After=network.target
 
 [Service]
+EnvironmentFile=/home/sis/sis-clock-express/.env
 WorkingDirectory=/home/sis/sis-clock-express
-ExecStart=/home/sis/.nvm/versions/node/v20.13.1/lib/node_modules/npm run dev
+ExecStart=/home/sis/.nvm/versions/node/v20.13.1/bin/npm run dev
 Restart=on-failure
 User=pi
 
