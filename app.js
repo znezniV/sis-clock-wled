@@ -71,6 +71,22 @@ const topicCircle = 'wled/circle/api'
 // define countdown variables and default value
 const endDate = new Date(2024, 5, 11, 17, 0, 0, 0) // 11.6.2024 17:00:00:00 -> months start with 0, so 0 for January
 
+// Define the start and end values
+const startValue = 6720000;
+const endValue = 6722420.97;
+
+// Define the start and end dates
+const startDateValue = new Date(2024, 4, 31, 10, 0, 0, 0); // May 31, 2024, 10:00:00
+
+// Calculate the total milliseconds between the start and end dates
+const totalMilliseconds = endDate - startDateValue;
+
+// Function to interpolate the value based on the elapsed time
+function getCurrentValue(elapsedMilliseconds) {
+    const ratio = elapsedMilliseconds / totalMilliseconds;
+    return startValue + (endValue - startValue) * ratio;
+}
+
 // connect to mqtt broker
 client.on("connect", function(connack) {
   console.log("client connected", connack)
@@ -101,6 +117,29 @@ function publishCountdown() {
 
   // mqtt publish payload to topic
   client.publish(topicCountdown, JSON.stringify(payload), {qos: 1, retain: true}, (PacketCallback, err) => {
+    if(err) {
+        console.log(err, 'MQTT publish packet')
+    }
+  })
+}
+
+// define value publish
+function publishValue() {
+  // Get the current date and time
+  const now = new Date();
+
+  // Calculate the elapsed milliseconds since the start date
+  const elapsedMilliseconds = now - startDateValue;
+
+  // define the overwrite segment name which then is displayed as text in the 'Scrolling Text' effect of WLED
+  const payload = {seg: [
+    {
+      n: `${getCurrentValue(elapsedMilliseconds)}`
+    }
+  ]}
+
+  // mqtt publish payload to topic
+  client.publish(topicValue, JSON.stringify(payload), {qos: 1, retain: true}, (PacketCallback, err) => {
     if(err) {
         console.log(err, 'MQTT publish packet')
     }
@@ -165,6 +204,7 @@ function publishCircle() {
 
 // start all the publish intervals
 let countdownInterval = setInterval(() => publishCountdown(), 1000)
+let valueInterval = setInterval(() => publishValue(), 1000)
 let circleInterval = setInterval(() => publishCircle(), circleSpeed)
 
 eventEmitter.on('event:clock_updated', handleClockUpdated);
