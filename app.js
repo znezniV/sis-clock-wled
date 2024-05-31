@@ -75,10 +75,10 @@ const endDate = new Date(2024, 5, 11, 17, 0, 0, 0) // 11.6.2024 17:00:00:00 -> m
 const startValue = 6720000;
 const endValue = 6722420.97;
 
-// Define the start and end dates
+// Define the start date for value
 const startDateValue = new Date(2024, 4, 31, 10, 0, 0, 0); // May 31, 2024, 10:00:00
 
-// Calculate the total milliseconds between the start and end dates
+// Calculate the total milliseconds between the value start date and end date
 const totalMilliseconds = endDate - startDateValue;
 
 // Function to interpolate the value based on the elapsed time
