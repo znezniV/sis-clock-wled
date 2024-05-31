@@ -203,8 +203,7 @@ function publishCircle() {
 }
 
 // start all the publish intervals
-let countdownInterval = setInterval(() => publishCountdown(), 1000)
-let valueInterval = setInterval(() => publishValue(), 1000)
+let matrixInterval = setInterval(() => {publishCountdown(), publishValue()}, 1000)
 let circleInterval = setInterval(() => publishCircle(), circleSpeed)
 
 eventEmitter.on('event:clock_updated', handleClockUpdated);
