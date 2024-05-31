@@ -69,7 +69,7 @@ const topicSolarFlares = 'wled/solarflares/api'
 const topicCircle = 'wled/circle/api'
 
 // define countdown variables and default value
-const endDate = new Date(2024, 5, 11, 18, 0, 0, 0) // 11.6.2024 18:00:00:00 -> months start with 0, so 0 for January
+const endDate = new Date(2024, 5, 11, 17, 0, 0, 0) // 11.6.2024 17:00:00:00 -> months start with 0, so 0 for January
 
 // connect to mqtt broker
 client.on("connect", function(connack) {
@@ -90,7 +90,7 @@ function publishCountdown() {
   // calculate countdown string
   const now = new Date()
   const difference = intervalToDuration({ end: endDate, start: now })
-  const countdown = `3:${('0' + difference.hours).slice(-2)}:${('0' + difference.minutes).slice(-2)}:${('0' + difference.seconds).slice(-2)}`
+  const countdown = `${((difference.days ? difference.days : 0))}:${('0' + (difference.hours ? difference.hours : 0)).slice(-2)}:${('0' + (difference.minutes ? difference.minutes : 0)).slice(-2)}:${('0' + (difference.seconds ? difference.seconds : 0)).slice(-2)}`
 
   // define the overwrite segment name which then is displayed as text in the 'Scrolling Text' effect of WLED
   const payload = {seg: [
