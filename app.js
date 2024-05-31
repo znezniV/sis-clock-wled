@@ -84,7 +84,7 @@ const totalMilliseconds = endDate - startDateValue;
 // Function to interpolate the value based on the elapsed time
 function getCurrentValue(elapsedMilliseconds) {
     const ratio = elapsedMilliseconds / totalMilliseconds;
-    return startValue + (endValue - startValue) * ratio;
+    return (startValue + (endValue - startValue) * ratio).toFixed(2);
 }
 
 // connect to mqtt broker
