@@ -229,6 +229,9 @@ function publishCircle() {
 }
 
 // start all the publish intervals
+publishCountdown()
+publishValue()
+publishSolarFlares()
 let matrixInterval = setInterval(() => {publishCountdown(), publishValue()}, 1000)
 let circleInterval = setInterval(() => publishCircle(), circleSpeed)
 let solarFlareInterval = setInterval(() => publishSolarFlares(), 600000)
