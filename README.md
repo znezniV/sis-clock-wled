@@ -26,10 +26,10 @@ Note: incomplete
 ### ESP Mapping (Microcontrollers)
 | Number | Displays | MQTT Topic | Settings URL | Config File |
 | --- | --- | --- | --- | --- |
-| 1 | Countdown | wled/circle | http://clock-01.local | clock-01_cfg.json |
-| 2 | Solar Flares | wled/solarflares | http://clock-02.local | clock-02_cfg.json |
-| 3 | Value | wled/value | http://clock-03.local | clock-03_cfg.json |
-| 4 | Countdown | wled/countdown | http://clock-04.local | clock-04_cfg.json |
+| 1 | Countdown | wled/circle | http://clock-01.local | [clock-01_cfg.json](wledconfigs/clock-01_cfg.json) |
+| 2 | Solar Flares | wled/solarflares | http://clock-02.local | [clock-02_cfg.json](wledconfigs/clock-02_cfg.json) |
+| 3 | Value | wled/value | http://clock-03.local | [clock-03_cfg.json](wledconfigs/clock-03_cfg.json) |
+| 4 | Countdown | wled/countdown | http://clock-04.local | [clock-04_cfg.json](wledconfigs/clock-04_cfg.json) |
 
 ### Control Webinterface
 
@@ -49,7 +49,7 @@ It is very likely that when the Raspberry Pi is turned off once and restarted, t
 5. Confirm
 6. Wait until the microcontroller is back up
 
-![reboot_wled.jpeg](https://prod-files-secure.s3.us-west-2.amazonaws.com/ed78092e-e8d3-4328-82f5-8d860f4d5386/5fc1770e-e8ca-46d2-8f35-8c04c9c2e911/reboot_wled.jpeg)
+![Screenshot Reboot WLED](doc/reboot_wled.jpeg)
 
 #### Raspberry Pi with Servers and Webinterface
 
