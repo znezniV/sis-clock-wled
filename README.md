@@ -21,7 +21,8 @@ Note: incomplete
 15. Reboot Raspberry and test if webapp is running on `https://raspberrypi.local/api`
 16. Alternatively, there is a .service file that somebody could make work
 
-## Hardware usage
+## Hardware usage
+
 ### ESP Mapping (Microcontrollers)
 | Number | Displays | MQTT Topic | Settings URL | Config File |
 | --- | --- | --- | --- | --- |
