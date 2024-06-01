@@ -63,7 +63,7 @@
   },
   "hw": {
     "led": {
-      "total": 512,
+      "total": 100,
       "maxpwr": 6600,
       "ledma": 0,
       "cct": false,
@@ -73,35 +73,10 @@
       "fps": 42,
       "rgbwm": 255,
       "ld": true,
-      "matrix": {
-        "mpc": 2,
-        "panels": [
-          {
-            "b": false,
-            "r": false,
-            "v": true,
-            "s": true,
-            "x": 0,
-            "y": 0,
-            "h": 8,
-            "w": 32
-          },
-          {
-            "b": false,
-            "r": false,
-            "v": true,
-            "s": true,
-            "x": 32,
-            "y": 0,
-            "h": 8,
-            "w": 32
-          }
-        ]
-      },
       "ins": [
         {
           "start": 0,
-          "len": 512,
+          "len": 100,
           "pin": [
             15
           ],
@@ -281,7 +256,7 @@
       "broker": "raspberrypi.local",
       "port": 1887,
       "user": "user1",
-      "pskl": 9,
+      "pskl": 0,
       "cid": "WLED-b579f4",
       "rtn": false,
       "topics": {
