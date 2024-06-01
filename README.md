@@ -28,7 +28,7 @@ Note: incomplete
 ### ESP Mapping (Microcontrollers)
 | Number | Displays | MQTT Topic | Settings URL | Config File |
 | --- | --- | --- | --- | --- |
-| 1 | Countdown | wled/circle | http://clock-01.local | [clock-01_cfg.json](wledconfigs/clock-01_cfg.json) |
+| 1 | Circle | wled/circle | http://clock-01.local | [clock-01_cfg.json](wledconfigs/clock-01_cfg.json) |
 | 2 | Solar Flares | wled/solarflares | http://clock-02.local | [clock-02_cfg.json](wledconfigs/clock-02_cfg.json) |
 | 3 | Value | wled/value | http://clock-03.local | [clock-03_cfg.json](wledconfigs/clock-03_cfg.json) |
 | 4 | Countdown | wled/countdown | http://clock-04.local | [clock-04_cfg.json](wledconfigs/clock-04_cfg.json) |
