@@ -21,3 +21,41 @@ Note: incomplete
 15. Reboot Raspberry and test if webapp is running on `https://raspberrypi.local/api`
 16. Alternatively, there is a .service file that somebody could make work
 
+## Hardware usage
+
+### ESP Mapping (Microcontrollers)
+| Number | Displays | MQTT Topic | Settings URL | Config File |
+| --- | --- | --- | --- | --- |
+| 1 | Countdown | wled/circle | http://clock-01.local | clock-01_cfg.json |
+| 2 | Solar Flares | wled/solarflares | http://clock-02.local | clock-02_cfg.json |
+| 3 | Value | wled/value | http://clock-03.local | clock-03_cfg.json |
+| 4 | Countdown | wled/countdown | http://clock-04.local | clock-04_cfg.json |
+
+### Control Webinterface
+
+1. Connect with the SIS2024 Wifi
+2. Go to http://raspberrypi.local:9000/api
+
+### Reboot
+
+It is very likely that when the Raspberry Pi is turned off once and restarted, the microcontrollers need to be rebooted after that as well before they receive new data.
+
+#### LED Microcontroller
+
+1. Connect with Wifi
+2. Open Microntroller URL (see ESP Mapping table)
+3. Tab on the information icon (i)
+4. Scroll to the bottom and press the reboot button
+5. Confirm
+6. Wait until the microcontroller is back up
+
+![reboot_wled.jpeg](https://prod-files-secure.s3.us-west-2.amazonaws.com/ed78092e-e8d3-4328-82f5-8d860f4d5386/5fc1770e-e8ca-46d2-8f35-8c04c9c2e911/reboot_wled.jpeg)
+
+#### Raspberry Pi with Servers and Webinterface
+
+1. Connect laptop to Wifi
+2. Open “Terminal” app on Macos
+3. Type `ssh sis@raspberrypi.local`
+4. Enter password
+5. Enter `sudo reboot`
+6. Wait until Raspberry Pi is back up
