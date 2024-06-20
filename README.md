@@ -5,7 +5,7 @@ Excuse me for the spaghetti code. It had to be done, rather than beautiful.
 Note: incomplete
 
 1. Connect through SSH
-2. Setup MQTT broker and make sure to start a service on boot [Mosquitto](https://mosquitto.org/download/) [Nice Tutorial](https://randomnerdtutorials.com/how-to-install-mosquitto-broker-on-raspberry-pi/)
+2. Setup MQTT broker and make sure to start a service on boot ([Mosquitto](https://mosquitto.org/download/) [Nice Tutorial](https://randomnerdtutorials.com/how-to-install-mosquitto-broker-on-Raspberry-pi/))
 2. If SSH keys are not installed yet, navigate to the .ssh directory (`cd ~/.ssh`) and generate some with `ssh-keygen -t ed25519 -C "your_email@example.com"` and add publickey as a deployment key in your repository (fork it repository first).
 3. **Optionally**, you can paste your computers public key to `authorized_keys` in the folder (or create it with `nano authorized_keys`).
 3. Clone the repository
@@ -20,7 +20,7 @@ Note: incomplete
 12. Paste in the resulting command as instructed.
 13. Type `pm2 start ./bin/www`
 14. `pm2 save`
-15. Reboot Raspberry and test if webapp is running on `https://raspberrypi.local/api`
+15. Reboot Raspberry Pi and test if webapp is running on `https://raspberrypi.local/api`
 16. Alternatively, there is a .service file that somebody could make work
 17. Set the time on the Raspberry Pi with the countdown correctly by either connecting to the internet and chosing a time server or by setting it manually with `sudo date -s '2021-01-04 13:04:00'`
 
@@ -68,4 +68,4 @@ To reboot the Raspberry Pi, login with SSH and run `sudo reboot`.
 6. Wait until Raspberry Pi is back up
 
 ## Note on Mosquitto MQTT Broker
-Somehow, the a forth channel created issues with the performance while blocking another channel that was updated frequently. Therefore, we added an additional Raspberry Pi with the same setup but without all the channels running on them. This way, a raspberry can also be rebooted without the whole clock turning off.
+Somehow, the a forth channel created issues with the performance while blocking another channel that was updated frequently. Therefore, we added an additional Raspberry Pi with the same setup but without all the channels running on them. This way, a Raspberry Pi can also be rebooted without the whole clock turning off.
