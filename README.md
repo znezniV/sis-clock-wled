@@ -1,3 +1,18 @@
+# Tech Stack
+## Hardware
+1. 100 RGB LED WS2812B mini PCBs
+2. 6x WorldSemi WS2812B Digitale 5050 RGB LED 32x8 Matrix
+3. 2x Raspberry Pi (3 B+ and 4 1GB)
+4. 4x Joy-it SBC-NodeMCU-ESP32
+5. TP-Link Archer MR200 Wifi Router
+6. Various power supplies, cabeles, and so on… (wip)
+
+## Software
+1. WLED Version 0.15.0-b3
+2. MQTT Broker (Mosquitto)
+3. Raspberry Pi OS
+4. Express Node.js Server
+
 # How to use
 Excuse me for the spaghetti code. It had to be done, rather than beautiful.
 
