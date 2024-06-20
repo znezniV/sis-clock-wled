@@ -68,8 +68,11 @@ const topicValue = 'wled/value/api'
 const topicSolarFlares = 'wled/solarflares/api'
 const topicCircle = 'wled/circle/api'
 
+// define circle LED length
+const circleTotalLength = 100
+
 // define countdown variables and default value
-const endDate = new Date(2024, 5, 11, 17, 0, 0, 0) // 11.6.2024 17:00:00:00 -> months start with 0, so 0 for January
+const endDate = new Date("2024-06-11T17:00:00") // 11.6.2024 17:00:00:00
 
 // Define the start and end values
 const startValue = 6720000;
@@ -107,7 +110,7 @@ function publishCountdown() {
   const now = new Date()
   const difference = intervalToDuration({ end: endDate, start: now })
   const countdown = `${((difference.days ? difference.days : 0))}:${('0' + (difference.hours ? difference.hours : 0)).slice(-2)}:${('0' + (difference.minutes ? difference.minutes : 0)).slice(-2)}:${('0' + (difference.seconds ? difference.seconds : 0)).slice(-2)}`
-
+  console.log('countdown', countdown)
   // define the overwrite segment name which then is displayed as text in the 'Scrolling Text' effect of WLED
   const payload = {seg: [
     {
@@ -181,24 +184,24 @@ const circleEnd = {
   color: 'FF0000',
   position: shared.led_id_end - 1
 }
+const circleDefaultColor = '000000'
 
 // define circle default speed
 let circleSpeed = minutesToMilliseconds(shared.led_duration) / shared.led_id_end
 
+// define reset animation time
+const circleResetSpeed = 1000
+
 // define circle publish
 function publishCircle() {
-  // define circle variables and default values
-
-  const circleDefaultColor = '000000'
-
   // define (WLED) segment variable with array of individual leds ('i' for individual)
   let seg = { "i": []}
 
   // loop through all the LEDs of the circle
-  for (let index = 0; index < shared.led_id_end; index++) {
+  for (let index = 0; index < circleTotalLength; index++) {
     // fill the individual LED array with index number and color
     seg.i[index] = [
-    // if it is the LED of the current LED or the one of the end, color it with the correct color, otherwise default color
+      // if it is the LED of the current LED or the one of the end, color it with the correct color, otherwise default color
       index, circleCurrent.position === index ? circleCurrent.color
       : circleEnd.position === index ? circleEnd.color
       : circleDefaultColor
@@ -220,19 +223,64 @@ function publishCircle() {
     }
   })
 
+  // define stop position if is not undefined and null or return custom led end point.
+  const stopPosition = shared.led_id_stop != undefined && shared.led_id_stop != null && shared.led_id_stop >= 3 && shared.led_id_stop !== '' ? (shared.led_id_stop - 2) : (shared.led_id_end - 2)
+
   // move the position of the LED of the circle forward or reset current circle position before it touches the end position
-  if (circleCurrent.position < shared.led_id_end - 2) {
+  if (circleCurrent.position < stopPosition) {
     circleCurrent.position++
   } else {
-    circleCurrent.position = 0
+    circleCurrent.position = shared.led_id_start - 1
   }
 }
+
+// function publishCircleReset() {
+//   const publishCircleResetInterval = setInterval(() => {
+//     console.log('reset interval')
+//     // console.log((circleResetSpeed + circleSpeed) / (circleCurrent.position - (shared.led_id_start - 1)))
+//     console.log(circleResetSpeed, circleSpeed, circleCurrent.position, shared.led_id_start - 1)
+//     // define (WLED) segment variable with array of individual leds ('i' for individual)
+//     let seg = { "i": []}
+
+//     // loop through all the LEDs of the circle
+//     for (let index = 0; index < shared.led_id_end; index++) {
+//       // fill the individual LED array with index number and color
+//       seg.i[index] = [
+//       // if it is the LED of the current LED or the one of the end, color it with the correct color, otherwise default color
+//         index, circleCurrent.position === index ? circleCurrent.color
+//         : circleEnd.position === index ? circleEnd.color
+//         : circleDefaultColor
+//       ]
+//     }
+
+//     // flatten the array to one dimension
+//     seg.i = seg.i.flat()
+
+//     // add the (WLED) segment variable to the payload
+//     const payload = {
+//       seg
+//     }
+
+//     // mqtt publish payload to topic
+//     client.publish(topicCircle, JSON.stringify(payload), {qos: 1, retain: true}, (PacketCallback, err) => {
+//       if(err) {
+//         console.log(err, 'MQTT publish packet')
+//       }
+//     })
+
+//     if(circleCurrent.position <= shared.led_id_start - 1) {
+//       clearInterval(publishCircleResetInterval)
+//     }
+//     circleCurrent.position = circleCurrent.position - 2
+//   }, (circleResetSpeed + circleSpeed) / (circleCurrent.position - shared.led_id_start))
+// }
 
 // start all the publish intervals
 publishCountdown()
 publishValue()
 publishSolarFlares()
-let matrixInterval = setInterval(() => {publishCountdown(), publishValue()}, 1000)
+let countdownInterval = setInterval(() => publishCountdown(), 1000)
+let valueInterval = setInterval(() => publishValue(), 4000)
 let circleInterval = setInterval(() => publishCircle(), circleSpeed)
 let solarFlareInterval = setInterval(() => publishSolarFlares(), 600000)
 
@@ -240,12 +288,16 @@ eventEmitter.on('event:clock_updated', handleClockUpdated);
 
 function handleClockUpdated() {
   clearInterval(circleInterval)
-  console.log('circle stopped')
-  circleSpeed = minutesToMilliseconds(shared.led_duration) / shared.led_id_end
-  circleCurrent.position = shared.led_id_start - 1
-  circleEnd.position = shared.led_id_end - 1
-  circleInterval = setInterval(() => publishCircle(), circleSpeed)
-  console.log('circle restarted')
+  // console.log('circle stopped')
+  // publishCircleReset()
+  // setTimeout(() => {
+    circleSpeed = minutesToMilliseconds(shared.led_duration) / shared.led_id_end
+    circleCurrent.position = shared.led_id_start - 1
+    circleEnd.position = shared.led_id_end - 1
+    publishCircle()
+    circleInterval = setInterval(() => publishCircle(), circleSpeed)
+    // console.log('circle restarted')
+  // }, circleResetSpeed)
 }
 
 client.on("error", function(err) {
