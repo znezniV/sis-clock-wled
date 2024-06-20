@@ -22,6 +22,7 @@ Note: incomplete
 14. `pm2 save`
 15. Reboot Raspberry and test if webapp is running on `https://raspberrypi.local/api`
 16. Alternatively, there is a .service file that somebody could make work
+17. Set the time on the Raspberry Pi with the countdown correctly by either connecting to the internet and chosing a time server or by setting it manually with `sudo date -s '2021-01-04 13:04:00'`
 
 ## Hardware usage
 
@@ -38,9 +39,13 @@ Note: incomplete
 1. Connect with the SIS2024 Wifi
 2. Go to http://raspberrypi.local:9000/api
 
-### Reboot
+### Reboot & Update code
+
+If you change the code of your server, you only need to restart the running process on the Raspberry Pi without the need to reboot it completely. For that, access the Raspberry Pi with SSH, navigate to the project folder (maybe that's not even needed) and type `pm2 restart 0` wheras the 0 stands for the ID of the service. If not sure what's the ID, type `pm2 list` and read from the list.
 
 It is very likely that when the Raspberry Pi is turned off once and restarted, the microcontrollers need to be rebooted after that as well before they receive new data.
+
+To reboot the Raspberry Pi, login with SSH and run `sudo reboot`.
 
 #### LED Microcontroller
 
@@ -61,3 +66,6 @@ It is very likely that when the Raspberry Pi is turned off once and restarted, t
 4. Enter password
 5. Enter `sudo reboot`
 6. Wait until Raspberry Pi is back up
+
+## Note on Mosquitto MQTT Broker
+Somehow, the a forth channel created issues with the performance while blocking another channel that was updated frequently. Therefore, we added an additional Raspberry Pi with the same setup but without all the channels running on them. This way, a raspberry can also be rebooted without the whole clock turning off.
