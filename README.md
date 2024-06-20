@@ -1,3 +1,5 @@
+![Studio for Immediate Spaces Graduation Show 2024, Clock. Credits: Sabine Leutenegger](doc/clock.jpg)
+
 # Tech Stack
 ## Hardware
 - 100 RGB LED WS2812B mini PCBs
