@@ -89,7 +89,7 @@ To reboot the Raspberry Pi, login with SSH and run `sudo reboot`.
 Somehow, the a forth channel created issues with the performance while blocking another channel that was updated frequently. Therefore, we added an additional Raspberry Pi with the same setup but without all the channels running on them. This way, a Raspberry Pi can also be rebooted without the whole clock turning off.
 
 # Contributors
-- Enno Pötschke [http://ennopoetschke.com](http://ennopoetschke.com), [@enno.poetschke](https://www.instagram.com/enno.poetschke/)
+- Enno Pötschke ([http://ennopoetschke.com](http://ennopoetschke.com), [@enno.poetschke](https://www.instagram.com/enno.poetschke/))
 - Lucas de Montalembert ([@lucasmontalembert](https://www.instagram.com/lucasmontalembert/))
-- Vinzenz Leutenegger ([@znezniV](https://github.com/znezniV) [@znezniV](https://www.instagram.com/znezniv/))
+- Vinzenz Leutenegger ([https://vinze.nz](http://vinze.nz), [@znezniV](https://github.com/znezniV) [@znezniV](https://www.instagram.com/znezniv/))
 - Zhiyi Cao ([https://zhiyicao.co/](https://zhiyicao.co/), [@zyc.revisionaire](https://www.instagram.com/zyc.revisionaire/))
