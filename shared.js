@@ -1,5 +1,5 @@
-// shared.js
-let _led_duration = 5;
+// set defaults here
+let _led_duration = 30;
 let _led_id_start = 1;
 let _led_id_stop = null;
 let _led_id_end = 100;
