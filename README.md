@@ -1,5 +1,5 @@
 ![Studio for Immediate Spaces Graduation Show 2024, Clock. Credits: Sabine Leutenegger](doc/clock.jpg)
-*Studio for Immediate Spaces Graduation Show 2024, Clock. Credits: Sabine Leutenegger*
+Leutenegger, Sabine. Clock, *Studio for Immediate Spaces Graduation Show 2024.* Photograph. June, 2024.
 
 # Tech Stack
 ## Hardware
