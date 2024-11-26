@@ -87,6 +87,7 @@ To reboot the Raspberry Pi, login with SSH and run `sudo reboot`.
 
 ## Note on Mosquitto MQTT Broker
 Somehow, the a forth channel created issues with the performance while blocking another channel that was updated frequently. Therefore, we added an additional Raspberry Pi with the same setup but without all the channels running on them. This way, a Raspberry Pi can also be rebooted without the whole clock turning off.
+Could be an issue with the MQTT buffer size, which should be around 1 kb.
 
 # Contributors
 - Enno Pötschke ([http://ennopoetschke.com](http://ennopoetschke.com), [@enno.poetschke](https://www.instagram.com/enno.poetschke/))
