@@ -275,14 +275,36 @@ function publishCircle() {
 //   }, (circleResetSpeed + circleSpeed) / (circleCurrent.position - shared.led_id_start))
 // }
 
+// define publish intervals
+let countdownInterval
+let valueInterval
+let circleInterval
+let solarFlareInterval
+
 // start all the publish intervals
-publishCountdown()
-publishValue()
-publishSolarFlares()
-let countdownInterval = setInterval(() => publishCountdown(), 1000)
-let valueInterval = setInterval(() => publishValue(), 4000)
-let circleInterval = setInterval(() => publishCircle(), circleSpeed)
-let solarFlareInterval = setInterval(() => publishSolarFlares(), 600000)
+if (process.env.COUNTDOWN === 'true') {
+  console.log('COUNTDOWN is turned ON')
+  publishCountdown()
+  countdownInterval = setInterval(() => publishCountdown(), 1000)
+}
+
+if (process.env.VALUE === 'true') {
+  console.log('VALUE is turned ON')
+  publishValue()
+  valueInterval = setInterval(() => publishValue(), 4000)
+}
+
+if (process.env.CIRCLE === 'true') {
+  console.log('CIRCLE is turned ON')
+  publishCircle()
+  circleInterval = setInterval(() => publishCircle(), circleSpeed)
+}
+
+if (process.env.SOLAR_FLARES === 'true') {
+  console.log('SOLAR_FLARES is turned ON')
+  publishSolarFlares()
+  solarFlareInterval = setInterval(() => publishSolarFlares(), 600000)
+}
 
 eventEmitter.on('event:clock_updated', handleClockUpdated);
 
