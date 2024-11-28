@@ -43,10 +43,12 @@ Note: incomplete
 17. Set the time on the Raspberry Pi with the countdown correctly by either connecting to the internet and chosing a time server or by setting it manually with `sudo date -s '2021-01-04 13:04:00'`
 
 ### Environment Variables
-`PORT` MQTT Port (check if already occupied)
-`BROKER_URL` url of broker Raspberry Pi, if not configured otherwise, it's `mqtt://raspberrypi.local:<PORT>`
-`BROKER_USR` MQTT broker user name
-`BROKER_PWD` MQTT broker password
+| Key | Example | Description |
+| --- | :---: | ---|
+| `PORT` | `1883` |  MQTT Port (check if already occupied) |
+| `BROKER_URL` | `mqtt://raspberrypi.local:<PORT>` |  URL of broker Raspberry Pi. Default Raspberry Adress is `raspberrypi.local`|
+| `BROKER_USR` | `user` (don't use) | MQTT broker user name |
+| `BROKER_PWD` | `password` (don't use) | MQTT broker password | 
 
 ## Hardware usage
 
