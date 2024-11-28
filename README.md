@@ -44,11 +44,15 @@ Note: incomplete
 
 ### Environment Variables
 | Key | Example | Description |
-| --- | :---: | ---|
+| --- | --- | ---|
 | `PORT` | `1883` |  MQTT Port (check if already occupied) |
 | `BROKER_URL` | `mqtt://raspberrypi.local:<PORT>` |  URL of broker Raspberry Pi. Default Raspberry Adress is `raspberrypi.local`|
 | `BROKER_USR` | `user` (don't use) | MQTT broker user name |
 | `BROKER_PWD` | `password` (don't use) | MQTT broker password | 
+| `CIRCLE` | `true` | `false` | Turn on publishing on circle channel |
+| `COUNTDOWN` | `true` | `false` | Turn on publishing on circle channel |
+| `SOLAR_FLARES` | `true` | `false` | Turn on publishing on circle channel |
+| `VALUE` | `true` | `false` | Turn on publishing on circle channel |
 
 ## Hardware usage
 
