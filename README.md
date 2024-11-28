@@ -23,7 +23,7 @@ Excuse me for the spaghetti code. It had to be done, rather than beautiful.
 Note: incomplete
 
 1. Connect through SSH
-2. Setup MQTT broker and make sure to start a service on boot ([Mosquitto](https://mosquitto.org/download/), [Nice Tutorial](https://randomnerdtutorials.com/how-to-install-mosquitto-broker-on-Raspberry-pi/), be aware of the port. Test with something like ([MQTTX](https://mqttx.app/)))
+2. Setup MQTT broker and make sure to start a service on boot ([Mosquitto](https://mosquitto.org/download/), [Nice Tutorial](https://randomnerdtutorials.com/how-to-install-mosquitto-broker-on-Raspberry-pi/), be aware of the port. Test with something like [MQTTX](https://mqttx.app/))
 2. If SSH keys are not installed yet, navigate to the .ssh directory (`cd ~/.ssh`) and generate some with `ssh-keygen -t ed25519 -C "your_email@example.com"` and add publickey as a deployment key in your repository (fork it repository first).
 3. **Optionally**, you can paste your computers public key to `authorized_keys` in the folder (or create it with `nano authorized_keys`).
 3. Clone the repository
