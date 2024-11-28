@@ -60,11 +60,6 @@ Note: incomplete
 | 3 | Value | `wled/value` | http://clock-03.local | [clock-03_cfg.json](wledconfigs/clock-03_cfg.json) |
 | 4 | Countdown | `wled/countdown` | http://clock-04.local | [clock-04_cfg.json](wledconfigs/clock-04_cfg.json) |
 
-### Control Webinterface
-
-1. Connect with the SIS2024 Wifi
-2. Go to http://raspberrypi.local:9000/api
-
 ### Reboot & Update code
 
 If you change the code of your server, you only need to restart the running process on the Raspberry Pi without the need to reboot it completely. For that, access the Raspberry Pi with SSH, navigate to the project folder (maybe that's not even needed) and type `pm2 restart 0` wheras the 0 stands for the ID of the service. If not sure what's the ID, type `pm2 list` and read from the list.
@@ -73,7 +68,7 @@ It is very likely that when the Raspberry Pi is turned off once and restarted, t
 
 To reboot the Raspberry Pi, login with SSH and run `sudo reboot`.
 
-#### LED Microcontroller
+### LED Microcontroller
 
 1. Connect with Wifi
 2. Open Microntroller URL (see ESP Mapping table)
@@ -96,6 +91,10 @@ To reboot the Raspberry Pi, login with SSH and run `sudo reboot`.
 ## Note on Mosquitto MQTT Broker
 Somehow, the a forth channel created issues with the performance while blocking another channel that was updated frequently. Therefore, we added an additional Raspberry Pi with the same setup but without all the channels running on them. This way, a Raspberry Pi can also be rebooted without the whole clock turning off.
 Could be an issue with the MQTT buffer size, which should be around 1 kb.
+
+## Control Webinterface
+1. Connect with the SIS2024 Wifi
+2. Go to http://raspberrypi.local:9000/api
 
 # Contributors
 - Enno Pötschke ([http://ennopoetschke.com](http://ennopoetschke.com), [@enno.poetschke](https://www.instagram.com/enno.poetschke/))
