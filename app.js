@@ -197,15 +197,36 @@ function publishCircle() {
   // define (WLED) segment variable with array of individual leds ('i' for individual)
   let seg = { "i": []}
 
+  let previousLEDColor;
   // loop through all the LEDs of the circle
   for (let index = 0; index < circleTotalLength; index++) {
-    // fill the individual LED array with index number and color
-    seg.i[index] = [
-      // if it is the LED of the current LED or the one of the end, color it with the correct color, otherwise default color
-      index, circleCurrent.position === index ? circleCurrent.color
-      : circleEnd.position === index ? circleEnd.color
-      : circleDefaultColor
-    ]
+
+    // set default LED color
+    let loopLEDColor = circleDefaultColor;
+
+    // check if loop index (through all LED loop) is at positon of the current or and led and if so, return defined colors for them
+    switch (index) {
+      case circleCurrent.position:
+        loopLEDColor = circleCurrent.color
+        break;
+      case circleEnd.position:
+        loopLEDColor = circleEnd.color
+        break;
+      default:
+        break;
+    }
+
+    // if the color of the current LED in the loop is the same color, don't write anything in the segment segment circle and assign to previous color 
+    if (loopLEDColor === previousLEDColor) {
+      previousLEDColor = loopLEDColor
+    } else { // if the color of the current LED in the loop is not the same color, write in color array and assign current color to previouus color
+      // fill the individual LED array with index number and color
+      seg.i[index] = [
+        // if it is the LED of the current LED or the one of the end, color it with the correct color, otherwise default color
+        index, loopLEDColor
+      ]
+      previousLEDColor = loopLEDColor
+    }
   }
 
   // flatten the array to one dimension
